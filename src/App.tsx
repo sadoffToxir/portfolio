@@ -1,14 +1,14 @@
-import CoreNavbar from './components/Core/CoreNavbar.js'
-import StarsCanvas from './components/Core/Stars/CoreStars.js'
+import CoreNavbar from './components/core/CoreNavbar.js'
+import StarsCanvas from './components/core/Stars/CoreStars.js'
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
+import Hero from './components/sections/hero/Hero.js';
 
 const darkTheme = createTheme({
   palette: {
     mode: 'dark',
     background: {
       default: '#242424',
-      paper: '#242424',
     }
   },
 });
@@ -19,10 +19,10 @@ function App() {
   return (
     <ThemeProvider theme={darkTheme}>
       <div>
-      <CssBaseline />
-
-      <CoreNavbar />
-      <StarsCanvas />
+        <CssBaseline />
+        <CoreNavbar />
+        <Hero />
+        <StarsCanvas />
       </div>
     </ThemeProvider>
   )

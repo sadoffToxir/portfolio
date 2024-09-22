@@ -13,13 +13,14 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import { useState } from 'react';
-import DataObjectIcon from '@mui/icons-material/DataObject';
+import {navbar} from '../../constants/content';
 
 interface Props {
   window?: () => Window;
 }
 
 const CoreNavbar = (props: Props) => {
+  const content = {...navbar}
 	const navItems = ['Home', 'About', 'Contact'];
 
   const { window } = props;
@@ -33,7 +34,7 @@ const CoreNavbar = (props: Props) => {
 	const drawer = (
     <Box onClick={handleDrawerToggle} sx={{ textAlign: 'center' }}>
       <Typography variant="h6" sx={{ my: 2 }}>
-			<DataObjectIcon fontSize="large"/>
+        {content.logo}
       </Typography>
       <Divider />
       <List>
@@ -51,11 +52,11 @@ const CoreNavbar = (props: Props) => {
 	const container = window !== undefined ? () => window().document.body : undefined;
 
   return (
-    <Box sx={{ display: 'flex' }}>
-      <CssBaseline />
+    <Box sx={{ display: 'flex'}}>
       <AppBar component="nav" sx={{
-				backgroundColor: 'rgba(36, 36, 36, 0.8)',        
-				boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.1)', 
+          position: 'static',
+          backgroundColor: 'rgba(36, 36, 36, 0.8)',        
+          boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.1)', 
 				}} elevation={0}>
         <Toolbar className="justify-between w-9/12 mx-auto text-white">
           <Typography
@@ -63,7 +64,7 @@ const CoreNavbar = (props: Props) => {
             component="div"
 						className=""
           >
-            <DataObjectIcon fontSize="large"/>
+            {content.logo}
           </Typography>
           <IconButton
             color="inherit"
@@ -83,23 +84,26 @@ const CoreNavbar = (props: Props) => {
           </Box>
         </Toolbar>
       </AppBar>
-      <nav>
-        <Drawer
-          container={container}
-          variant="temporary"
-          open={mobileOpen}
-          onClose={handleDrawerToggle}
-          ModalProps={{
-            keepMounted: true,
-          }}
-          sx={{
-            display: { xs: 'block', sm: 'none' },
-            '& .MuiDrawer-paper': { boxSizing: 'border-box', width: 240 },
-          }}
-        >
-          {drawer}
-        </Drawer>
-      </nav>
+      { 
+        mobileOpen &&
+          <nav>
+            <Drawer
+              container={container}
+              variant="temporary"
+              open={mobileOpen}
+              onClose={handleDrawerToggle}
+              ModalProps={{
+                keepMounted: true,
+              }}
+              sx={{
+                display: { xs: 'block', sm: 'none' },
+                '& .MuiDrawer-paper': { boxSizing: 'border-box', width: 240 },
+              }}
+            >
+              {drawer}
+            </Drawer>
+          </nav>
+      }
 		</Box>
 	);
 }
